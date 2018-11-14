@@ -9,6 +9,7 @@ services:
         ELK_VERSION: $ELK_VERSION
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - $CLIENT_DIAG_PATH/elasticsearch-data:/usr/share/elasticsearch/data
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -23,8 +24,9 @@ services:
       args:
         ELK_VERSION: $ELK_VERSION
     volumes:
-      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./logstash/config:/usr/share/logstash/config:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
+      - $CLIENT_DIAG_PATH:/client_data/
     ports:
       - "5000:5000"
       - "9600:9600"

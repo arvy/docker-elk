@@ -1,0 +1,5 @@
+MILLISECOND (\d{3})
+JAVALOGBACKTIMESTAMP %{YEAR}-%{MONTHNUM}-%{MONTHDAY}[T ]%{HOUR}:%{MINUTE}:%{SECOND},%{MILLISECOND}
+CASS_BASE ^%{LOGLEVEL:level}  \[(%{DATA:process}:%{INT:threadId}|%{DATA:process})\] %{JAVALOGBACKTIMESTAMP:timestamp}  %{WORD:java_file}.java:%{INT:line_number} -
+# WARN  [Service Thread] 2016-06-30 14:42:41,538  GCInspector.java:256 - *
+CASS_DEFAULT %{CASS_BASE} (?<message>(.|\r|\n)*)
